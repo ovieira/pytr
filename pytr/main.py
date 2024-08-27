@@ -152,6 +152,11 @@ def get_main_parser():
         '-l', '--lang', help='Two letter language code or "auto" for system language', default='auto'
     )
 
+    parser_export_transactions.add_argument(
+        '-csv_format', help='Export uploadable csv format to portfolio trackers', default='default'
+    )
+    
+
     info = 'Print shell tab completion'
     parser_completion = parser_cmd.add_parser(
         'completion', formatter_class=argparse.ArgumentDefaultsHelpFormatter, help=info, description=info
@@ -222,7 +227,7 @@ def main():
         if args.output is not None:
             p.portfolio_to_csv(args.output)
     elif args.command == 'export_transactions':
-        export_transactions(args.input, args.output, args.lang)
+        export_transactions(args.input, args.output, args.lang, args.csv_format)
     elif args.version:
         installed_version = version('pytr')
         print(installed_version)
